@@ -8,40 +8,36 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
-/* ====================== PALETTE ====================== */
+/* ====================== PALETTE (pastel, dari colors.xml KalkulatorSederhana) ====================== */
 :root {
   /* Night */
-  --bg:#180f24;--bg2:#241535;
-  --card:#ffffff;--card-bd:#d855a8;
-  --ink:#2a1a3a;--fg:#f0e8ff;--mut:#9b7dbd;--line:#d4b8f0;
-  /* Accents */
-  --pk:#ffb3de;--pkb:#d855a8;
-  --lv:#c4a8ff;--lvb:#7c3aed;
-  --ye:#ffe87c;--yeb:#c9920f;
-  --or:#ffca80;--orb:#c96b0f;
-  --bl:#80d4ff;--blb:#0a80d4;
-  --gr:#80ffca;--grb:#0aad6e;
-  --rd:#ff8080;--rdb:#c02020;
-  --cy:#80f0ff;--cyb:#0aacc4;
-  --sh:#0b0618;
-  /* Code & Crypto Boxes - Night (Black/Yellow) */
-  --hex-bg:#120920;
-  --hex-fg:#ffe87c;
-  --hex-bd:#5c358a;
-  --hex-title:#d4b8f0;
+  --bg:#2E2438;--bg2:#3A2D48;
+  --card:#FFFFFF;--card-bd:#F29BC1;
+  --ink:#4E3D57;--fg:#F5EFE0;--mut:#7A5E88;--line:#E6DBFF;
+  --hdr-sub:#D9C6E8;
+  /* Accents: isi pastel + garis tepi lembut */
+  --pk:#FFD6E8;--pkb:#F29BC1;
+  --lv:#E6DBFF;--lvb:#B197F0;
+  --ye:#FFF6CC;--yeb:#E6C96A;
+  --or:#FFE3C2;--orb:#EBB07A;
+  --bl:#D9EEFF;--blb:#7DBBE6;
+  --gr:#DBF7E6;--grb:#7EC9A3;
+  --rd:#FFD9D9;--rdb:#E89A9A;
+  --cy:#D9F7FB;--cyb:#7ED3E0;
+  --sh:#1F1729;
+  /* Warna teks aksen (lebih tua dari garis tepi supaya terbaca di atas kartu terang) */
+  --pkt:#A8457A;--lvt:#6A4EBB;--blt:#2A72A8;--grt:#1B7343;--yet:#8F6B0A;--ort:#A5550F;--rdt:#B33426;
+  /* Code & Crypto Boxes */
+  --hex-bg:#FBF5FF;
+  --hex-fg:#4E3D57;
+  --hex-bd:#E6DBFF;
+  --hex-title:#6A4EBB;
 }
 [data-theme="day"] {
   --bg:#8BBCCF;--bg2:#A8CDE0;
-  --card:rgba(255,255,255,0.94);--card-bd:#b06090;
-  --fg:#1a0e2a;--mut:#5a3a7a;--line:#c0a0d8;
-  --sh:#8888aa;
-  --pkb:#b03080;--lvb:#6030c0;--yeb:#a07000;
-  --blb:#0060a0;--grb:#008050;--orb:#a04800;
-  /* Code & Crypto Boxes - Day */
-  --hex-bg:#f5edfc;
-  --hex-fg:#50107a;
-  --hex-bd:#bfa4dc;
-  --hex-title:#6c3098;
+  --fg:#5C4B63;--mut:#7A5E88;--line:#E6DBFF;
+  --hdr-sub:#7A4B63;
+  --sh:#E8C3D5;
 }
 /* ====================== BASE ====================== */
 * {box-sizing:border-box;margin:0;padding:0}
@@ -62,9 +58,13 @@ body::after {
 }
 /* ====================== DAY SKY ====================== */
 .day-sky {
-  position:fixed;inset:0;z-index:-2;
-  background:linear-gradient(180deg,#6aaac4 0%,#8BBCCF 20%,#A8CDE0 55%,#C8E2EE 100%);
-  opacity:0;transition:opacity 0.5s;pointer-events:none;
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background:linear-gradient(180deg,#6AAAC4 0%,#8BBCCF 20%,#A8CDE0 55%,#C8E2EE 100%);
+  opacity:0;
+  transition:opacity 0.5s;
+  pointer-events:none;
 }
 [data-theme="day"] .day-sky {opacity:1}
 /* ====================== CLOUDS ====================== */
@@ -112,19 +112,26 @@ header h1 {
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   background-clip:text;
-  filter:drop-shadow(0 0 16px rgba(216,85,168,0.6));
+  filter:drop-shadow(0 0 14px rgba(242,155,193,0.45));
   margin-bottom:6px;
   text-align:center;
 }
 [data-theme="day"] header h1 {
-  background:linear-gradient(135deg,#b03080,#6030c0,#0060a0);
-  -webkit-background-clip:text;
-  background-clip:text;
-  filter:drop-shadow(0 0 8px rgba(176,48,128,0.35));
+  background:none;
+  -webkit-text-fill-color:#F8FDFF;
+  color:#F8FDFF;
+
+  text-shadow:
+    2px 2px 0 #9ED9F2,
+    0 0 4px #DDF6FF,
+    0 0 10px rgba(255,255,255,0.9),
+    0 0 18px rgba(126,205,239,0.7);
+
+  filter:none;
 }
 header small {
   display:block;
-  color:var(--mut);
+  color:var(--hdr-sub);
   font-size:10px;
   letter-spacing:2px;
   text-align:center;
@@ -191,11 +198,11 @@ main {max-width:960px;margin:0 auto;padding:18px 18px 220px;position:relative;z-
 
 /* ====================== HEADINGS & PRECISION ALIGNMENT ====================== */
 h2 {
-  font-size:13px;margin:0 0 12px;color:var(--pkb);
+  font-size:13px;margin:0 0 12px;color:var(--pkt);
   display:flex;align-items:center;gap:10px;flex-wrap:wrap;
 }
 h3 {
-  font-size:11px;margin:18px 0 10px;color:var(--lvb);
+  font-size:11px;margin:18px 0 10px;color:var(--lvt);
   display:flex;align-items:center;gap:8px;flex-wrap:wrap;
 }
 label {display:block;font-size:9px;color:var(--mut);margin:10px 0 4px}
@@ -231,7 +238,7 @@ table {width:100%;border-collapse:collapse;font-size:9px}
 th,td {text-align:left;padding:10px 8px;border-bottom:3px solid #f0e0ff;vertical-align:middle}
 th {color:var(--mut);font-size:8px}
 tr.win {background:#e0fff0}
-a {color:var(--pkb)}
+a {color:var(--pkt)}
 
 /* ====================== CRYPTO BOXES & EXACT PIXEL FONT ====================== */
 .param-box {
@@ -260,7 +267,7 @@ a {color:var(--pkb)}
   word-break:break-all;
   overflow-wrap:anywhere;
   color:var(--hex-fg);
-  background:rgba(0,0,0,0.45);
+  background:rgba(255,255,255,0.9);
   border:2px dashed var(--hex-bd);
   padding:10px 12px;
   user-select:all;
@@ -293,9 +300,8 @@ a {color:var(--pkb)}
   gap:8px;
   font-size:11px;
   font-weight:700;
-  color:var(--fg);
+  color:var(--ink);
 }
-[data-theme="day"] .item-card-title {color:var(--ink)}
 .saldo-bdg {
   display:inline-flex;
   align-items:center;
@@ -334,15 +340,15 @@ a {color:var(--pkb)}
 .pxi svg {display:block}
 
 .tag {display:inline-flex;align-items:center;padding:3px 8px;border:3px solid;font-size:9px;line-height:1}
-.tag.open {color:#0a7a50;border-color:var(--grb);background:var(--gr)}
+.tag.open {color:var(--grt);border-color:var(--grb);background:var(--gr)}
 .tag.closed {color:var(--mut);border-color:var(--line)}
-.tag.sealed {color:#9a1060;border-color:var(--pkb);background:var(--pk)}
+.tag.sealed {color:#933768;border-color:var(--pkb);background:var(--pk)}
 .msg {
   padding:12px 14px;border:4px solid var(--yeb);
   background:var(--ye);color:var(--ink);margin:0 0 18px;font-size:9px;
   display:flex;align-items:center;gap:10px;flex-wrap:wrap;
 }
-.mut {color:var(--mut)}.bad {color:#c0392b}.ok {color:#1a8a50}
+.mut {color:var(--mut)}.bad {color:var(--rdt)}.ok {color:var(--grt)}
 details summary {
   cursor:pointer;color:var(--mut);font-size:9px;margin:8px 0;
   display:flex;align-items:center;gap:8px;
@@ -575,26 +581,26 @@ const cur=()=>S.a.find(a=>a.id===S.sel);
 /* pixel art SVG icon builders - strictly centered */
 const wrapPx=svg=>`<span class="pxi">${svg}</span>`;
 const pxI={
-  gear:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="0" width="3" height="1" fill="#9b7dbd"/><rect x="0" y="2" width="1" height="3" fill="#9b7dbd"/><rect x="6" y="2" width="1" height="3" fill="#9b7dbd"/><rect x="2" y="6" width="3" height="1" fill="#9b7dbd"/><rect x="1" y="1" width="5" height="5" fill="#c4a8ff"/><rect x="2" y="2" width="3" height="3" fill="#1a1025"/><rect x="3" y="3" width="1" height="1" fill="#c4a8ff"/></svg>`),
-  key:wrapPx(`<svg width="14" height="14" viewBox="0 0 8 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="1" width="2" height="2" fill="#ffe87c"/><rect x="1" y="0" width="2" height="1" fill="#ffe87c"/><rect x="1" y="3" width="2" height="1" fill="#ffe87c"/><rect x="0" y="1" width="1" height="2" fill="#ffe87c"/><rect x="3" y="2" width="5" height="1" fill="#c9920f"/><rect x="6" y="3" width="1" height="2" fill="#c9920f"/><rect x="7" y="3" width="1" height="1" fill="#c9920f"/><rect x="1" y="1" width="1" height="1" fill="#fff"/></svg>`),
-  list:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="1" width="1" height="1" fill="#c4a8ff"/><rect x="2" y="1" width="5" height="1" fill="#9b7dbd"/><rect x="0" y="3" width="1" height="1" fill="#c4a8ff"/><rect x="2" y="3" width="5" height="1" fill="#9b7dbd"/><rect x="0" y="5" width="1" height="1" fill="#c4a8ff"/><rect x="2" y="5" width="5" height="1" fill="#9b7dbd"/></svg>`),
-  lock:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 8" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="0" width="3" height="1" fill="#c9920f"/><rect x="1" y="1" width="1" height="2" fill="#c9920f"/><rect x="5" y="1" width="1" height="2" fill="#c9920f"/><rect x="0" y="3" width="7" height="5" fill="#ffe87c"/><rect x="3" y="5" width="1" height="2" fill="#c9920f"/></svg>`),
-  unlock:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 8" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="0" width="3" height="1" fill="#0aad6e"/><rect x="5" y="1" width="1" height="2" fill="#0aad6e"/><rect x="0" y="3" width="7" height="5" fill="#80ffca"/><rect x="3" y="5" width="1" height="2" fill="#0aad6e"/></svg>`),
-  envelope:wrapPx(`<svg width="14" height="14" viewBox="0 0 8 6" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="8" height="6" fill="#ffb3de"/><rect x="0" y="0" width="1" height="1" fill="#d855a8"/><rect x="7" y="0" width="1" height="1" fill="#d855a8"/><rect x="1" y="1" width="1" height="1" fill="#d855a8"/><rect x="6" y="1" width="1" height="1" fill="#d855a8"/><rect x="2" y="2" width="1" height="1" fill="#d855a8"/><rect x="5" y="2" width="1" height="1" fill="#d855a8"/><rect x="3" y="3" width="2" height="1" fill="#d855a8"/></svg>`),
-  person:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="0" width="3" height="3" fill="#80d4ff"/><rect x="3" y="1" width="1" height="1" fill="#fff"/><rect x="1" y="3" width="5" height="1" fill="#0a80d4"/><rect x="0" y="4" width="7" height="3" fill="#80d4ff"/></svg>`),
-  chart:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="4" width="2" height="3" fill="#80ffca"/><rect x="3" y="2" width="2" height="5" fill="#c4a8ff"/><rect x="6" y="0" width="1" height="7" fill="#ffb3de"/></svg>`),
-  trophy:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="0" width="5" height="1" fill="#ffe87c"/><rect x="0" y="1" width="7" height="3" fill="#ffe87c"/><rect x="1" y="4" width="5" height="1" fill="#ffe87c"/><rect x="2" y="5" width="3" height="1" fill="#c9920f"/><rect x="1" y="6" width="5" height="1" fill="#c9920f"/><rect x="3" y="2" width="1" height="1" fill="#fff"/></svg>`),
-  medal:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="0" width="1" height="3" fill="#ff8080"/><rect x="4" y="0" width="1" height="3" fill="#ff8080"/><rect x="1" y="3" width="5" height="4" fill="#ffe87c"/><rect x="2" y="4" width="3" height="2" fill="#c9920f"/><rect x="3" y="5" width="1" height="1" fill="#ffe87c"/></svg>`),
-  flask:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 8" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="0" width="3" height="1" fill="#c4a8ff"/><rect x="3" y="1" width="1" height="2" fill="#c4a8ff"/><rect x="1" y="3" width="5" height="1" fill="#c4a8ff"/><rect x="0" y="4" width="7" height="4" fill="#c4a8ff"/><rect x="1" y="5" width="5" height="2" fill="#80ffca"/></svg>`),
-  pen:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="0" width="2" height="1" fill="#c9920f"/><rect x="4" y="1" width="2" height="1" fill="#c9920f"/><rect x="3" y="2" width="2" height="1" fill="#ffe87c"/><rect x="2" y="3" width="2" height="1" fill="#ffe87c"/><rect x="1" y="4" width="2" height="1" fill="#ffe87c"/><rect x="0" y="5" width="2" height="1" fill="#c9920f"/><rect x="0" y="6" width="1" height="1" fill="#2a1a3a"/></svg>`),
-  mask:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="7" height="5" fill="#ffe87c"/><rect x="1" y="1" width="2" height="2" fill="#2a1a3a"/><rect x="4" y="1" width="2" height="2" fill="#2a1a3a"/><rect x="2" y="4" width="3" height="1" fill="#c9920f"/><rect x="1" y="5" width="5" height="2" fill="#ffca80"/><rect x="3" y="5" width="1" height="1" fill="#c9920f"/></svg>`),
-  plus:wrapPx(`<svg width="12" height="12" viewBox="0 0 5 5" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="0" width="1" height="5" fill="#0aad6e"/><rect x="0" y="2" width="5" height="1" fill="#0aad6e"/></svg>`),
-  check:wrapPx(`<svg width="12" height="12" viewBox="0 0 7 6" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="0" width="2" height="1" fill="#0aad6e"/><rect x="4" y="1" width="2" height="1" fill="#0aad6e"/><rect x="3" y="2" width="2" height="1" fill="#0aad6e"/><rect x="0" y="3" width="1" height="1" fill="#0aad6e"/><rect x="2" y="3" width="2" height="1" fill="#0aad6e"/><rect x="0" y="4" width="2" height="1" fill="#0aad6e"/></svg>`),
-  cross:wrapPx(`<svg width="12" height="12" viewBox="0 0 5 5" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="1" height="1" fill="#c02020"/><rect x="4" y="0" width="1" height="1" fill="#c02020"/><rect x="1" y="1" width="1" height="1" fill="#c02020"/><rect x="3" y="1" width="1" height="1" fill="#c02020"/><rect x="2" y="2" width="1" height="1" fill="#c02020"/><rect x="1" y="3" width="1" height="1" fill="#c02020"/><rect x="3" y="3" width="1" height="1" fill="#c02020"/><rect x="0" y="4" width="1" height="1" fill="#c02020"/><rect x="4" y="4" width="1" height="1" fill="#c02020"/></svg>`),
-  party:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="0" width="1" height="1" fill="#ffe87c"/><rect x="5" y="0" width="1" height="1" fill="#ffb3de"/><rect x="1" y="1" width="1" height="1" fill="#80d4ff"/><rect x="0" y="3" width="1" height="1" fill="#c4a8ff"/><rect x="1" y="3" width="5" height="4" fill="#ffe87c"/><rect x="2" y="4" width="3" height="2" fill="#c9920f"/><rect x="6" y="2" width="1" height="1" fill="#80ffca"/></svg>`),
-  num1:wrapPx(`<svg width="14" height="14" viewBox="0 0 5 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="0" width="2" height="1" fill="#c4a8ff"/><rect x="2" y="1" width="1" height="4" fill="#c4a8ff"/><rect x="1" y="5" width="3" height="1" fill="#c4a8ff"/></svg>`),
-  num2:wrapPx(`<svg width="14" height="14" viewBox="0 0 5 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="0" width="3" height="1" fill="#ffb3de"/><rect x="3" y="1" width="1" height="1" fill="#ffb3de"/><rect x="2" y="2" width="1" height="1" fill="#ffb3de"/><rect x="1" y="3" width="1" height="1" fill="#ffb3de"/><rect x="1" y="4" width="3" height="1" fill="#ffb3de"/></svg>`),
-  num3:wrapPx(`<svg width="14" height="14" viewBox="0 0 5 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="0" width="3" height="1" fill="#80ffca"/><rect x="3" y="1" width="1" height="1" fill="#80ffca"/><rect x="2" y="2" width="1" height="1" fill="#80ffca"/><rect x="3" y="3" width="1" height="1" fill="#80ffca"/><rect x="1" y="4" width="3" height="1" fill="#80ffca"/></svg>`)
+  gear:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="0" width="3" height="1" fill="#9b7dbd"/><rect x="0" y="2" width="1" height="3" fill="#9b7dbd"/><rect x="6" y="2" width="1" height="3" fill="#9b7dbd"/><rect x="2" y="6" width="3" height="1" fill="#9b7dbd"/><rect x="1" y="1" width="5" height="5" fill="#B197F0"/><rect x="2" y="2" width="3" height="3" fill="#1a1025"/><rect x="3" y="3" width="1" height="1" fill="#B197F0"/></svg>`),
+  key:wrapPx(`<svg width="14" height="14" viewBox="0 0 8 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="1" width="2" height="2" fill="#FFEFA0"/><rect x="1" y="0" width="2" height="1" fill="#FFEFA0"/><rect x="1" y="3" width="2" height="1" fill="#FFEFA0"/><rect x="0" y="1" width="1" height="2" fill="#FFEFA0"/><rect x="3" y="2" width="5" height="1" fill="#D9B13F"/><rect x="6" y="3" width="1" height="2" fill="#D9B13F"/><rect x="7" y="3" width="1" height="1" fill="#D9B13F"/><rect x="1" y="1" width="1" height="1" fill="#fff"/></svg>`),
+  list:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="1" width="1" height="1" fill="#B197F0"/><rect x="2" y="1" width="5" height="1" fill="#9b7dbd"/><rect x="0" y="3" width="1" height="1" fill="#B197F0"/><rect x="2" y="3" width="5" height="1" fill="#9b7dbd"/><rect x="0" y="5" width="1" height="1" fill="#B197F0"/><rect x="2" y="5" width="5" height="1" fill="#9b7dbd"/></svg>`),
+  lock:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 8" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="0" width="3" height="1" fill="#D9B13F"/><rect x="1" y="1" width="1" height="2" fill="#D9B13F"/><rect x="5" y="1" width="1" height="2" fill="#D9B13F"/><rect x="0" y="3" width="7" height="5" fill="#FFEFA0"/><rect x="3" y="5" width="1" height="2" fill="#D9B13F"/></svg>`),
+  unlock:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 8" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="0" width="3" height="1" fill="#5DBB8A"/><rect x="5" y="1" width="1" height="2" fill="#5DBB8A"/><rect x="0" y="3" width="7" height="5" fill="#A8E8C8"/><rect x="3" y="5" width="1" height="2" fill="#5DBB8A"/></svg>`),
+  envelope:wrapPx(`<svg width="14" height="14" viewBox="0 0 8 6" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="8" height="6" fill="#FFC9E3"/><rect x="0" y="0" width="1" height="1" fill="#E57DB0"/><rect x="7" y="0" width="1" height="1" fill="#E57DB0"/><rect x="1" y="1" width="1" height="1" fill="#E57DB0"/><rect x="6" y="1" width="1" height="1" fill="#E57DB0"/><rect x="2" y="2" width="1" height="1" fill="#E57DB0"/><rect x="5" y="2" width="1" height="1" fill="#E57DB0"/><rect x="3" y="3" width="2" height="1" fill="#E57DB0"/></svg>`),
+  person:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="0" width="3" height="3" fill="#A5DBF5"/><rect x="3" y="1" width="1" height="1" fill="#fff"/><rect x="1" y="3" width="5" height="1" fill="#6AAEE0"/><rect x="0" y="4" width="7" height="3" fill="#A5DBF5"/></svg>`),
+  chart:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="4" width="2" height="3" fill="#A8E8C8"/><rect x="3" y="2" width="2" height="5" fill="#B197F0"/><rect x="6" y="0" width="1" height="7" fill="#FFC9E3"/></svg>`),
+  trophy:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="0" width="5" height="1" fill="#FFEFA0"/><rect x="0" y="1" width="7" height="3" fill="#FFEFA0"/><rect x="1" y="4" width="5" height="1" fill="#FFEFA0"/><rect x="2" y="5" width="3" height="1" fill="#D9B13F"/><rect x="1" y="6" width="5" height="1" fill="#D9B13F"/><rect x="3" y="2" width="1" height="1" fill="#fff"/></svg>`),
+  medal:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="0" width="1" height="3" fill="#FFA3A3"/><rect x="4" y="0" width="1" height="3" fill="#FFA3A3"/><rect x="1" y="3" width="5" height="4" fill="#FFEFA0"/><rect x="2" y="4" width="3" height="2" fill="#D9B13F"/><rect x="3" y="5" width="1" height="1" fill="#FFEFA0"/></svg>`),
+  flask:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 8" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="0" width="3" height="1" fill="#B197F0"/><rect x="3" y="1" width="1" height="2" fill="#B197F0"/><rect x="1" y="3" width="5" height="1" fill="#B197F0"/><rect x="0" y="4" width="7" height="4" fill="#B197F0"/><rect x="1" y="5" width="5" height="2" fill="#A8E8C8"/></svg>`),
+  pen:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="0" width="2" height="1" fill="#D9B13F"/><rect x="4" y="1" width="2" height="1" fill="#D9B13F"/><rect x="3" y="2" width="2" height="1" fill="#FFEFA0"/><rect x="2" y="3" width="2" height="1" fill="#FFEFA0"/><rect x="1" y="4" width="2" height="1" fill="#FFEFA0"/><rect x="0" y="5" width="2" height="1" fill="#D9B13F"/><rect x="0" y="6" width="1" height="1" fill="#2a1a3a"/></svg>`),
+  mask:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="7" height="5" fill="#FFEFA0"/><rect x="1" y="1" width="2" height="2" fill="#2a1a3a"/><rect x="4" y="1" width="2" height="2" fill="#2a1a3a"/><rect x="2" y="4" width="3" height="1" fill="#D9B13F"/><rect x="1" y="5" width="5" height="2" fill="#FFD9A8"/><rect x="3" y="5" width="1" height="1" fill="#D9B13F"/></svg>`),
+  plus:wrapPx(`<svg width="12" height="12" viewBox="0 0 5 5" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="0" width="1" height="5" fill="#5DBB8A"/><rect x="0" y="2" width="5" height="1" fill="#5DBB8A"/></svg>`),
+  check:wrapPx(`<svg width="12" height="12" viewBox="0 0 7 6" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="0" width="2" height="1" fill="#5DBB8A"/><rect x="4" y="1" width="2" height="1" fill="#5DBB8A"/><rect x="3" y="2" width="2" height="1" fill="#5DBB8A"/><rect x="0" y="3" width="1" height="1" fill="#5DBB8A"/><rect x="2" y="3" width="2" height="1" fill="#5DBB8A"/><rect x="0" y="4" width="2" height="1" fill="#5DBB8A"/></svg>`),
+  cross:wrapPx(`<svg width="12" height="12" viewBox="0 0 5 5" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="1" height="1" fill="#E07A7A"/><rect x="4" y="0" width="1" height="1" fill="#E07A7A"/><rect x="1" y="1" width="1" height="1" fill="#E07A7A"/><rect x="3" y="1" width="1" height="1" fill="#E07A7A"/><rect x="2" y="2" width="1" height="1" fill="#E07A7A"/><rect x="1" y="3" width="1" height="1" fill="#E07A7A"/><rect x="3" y="3" width="1" height="1" fill="#E07A7A"/><rect x="0" y="4" width="1" height="1" fill="#E07A7A"/><rect x="4" y="4" width="1" height="1" fill="#E07A7A"/></svg>`),
+  party:wrapPx(`<svg width="14" height="14" viewBox="0 0 7 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="0" width="1" height="1" fill="#FFEFA0"/><rect x="5" y="0" width="1" height="1" fill="#FFC9E3"/><rect x="1" y="1" width="1" height="1" fill="#A5DBF5"/><rect x="0" y="3" width="1" height="1" fill="#B197F0"/><rect x="1" y="3" width="5" height="4" fill="#FFEFA0"/><rect x="2" y="4" width="3" height="2" fill="#D9B13F"/><rect x="6" y="2" width="1" height="1" fill="#A8E8C8"/></svg>`),
+  num1:wrapPx(`<svg width="14" height="14" viewBox="0 0 5 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="0" width="2" height="1" fill="#B197F0"/><rect x="2" y="1" width="1" height="4" fill="#B197F0"/><rect x="1" y="5" width="3" height="1" fill="#B197F0"/></svg>`),
+  num2:wrapPx(`<svg width="14" height="14" viewBox="0 0 5 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="0" width="3" height="1" fill="#FFC9E3"/><rect x="3" y="1" width="1" height="1" fill="#FFC9E3"/><rect x="2" y="2" width="1" height="1" fill="#FFC9E3"/><rect x="1" y="3" width="1" height="1" fill="#FFC9E3"/><rect x="1" y="4" width="3" height="1" fill="#FFC9E3"/></svg>`),
+  num3:wrapPx(`<svg width="14" height="14" viewBox="0 0 5 7" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="0" width="3" height="1" fill="#A8E8C8"/><rect x="3" y="1" width="1" height="1" fill="#A8E8C8"/><rect x="2" y="2" width="1" height="1" fill="#A8E8C8"/><rect x="3" y="3" width="1" height="1" fill="#A8E8C8"/><rect x="1" y="4" width="3" height="1" fill="#A8E8C8"/></svg>`)
 };
 
 const cc=()=>`<div class="cbl"></div><div class="cbr"></div>`;
